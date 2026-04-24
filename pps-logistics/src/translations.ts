@@ -120,7 +120,7 @@ export const translations = {
         links: ["PPS ID", "Business Portal", "Manage Tags", "Support"]
       },
       copyright: "© 2026 PPS Logistics Inc. Panama's Definitve Postal Solution.",
-      legal: ["Panama", "Privacy", "Terms", "Legal"]
+      legal: ["Panama", "Privacy", "Terms", "Delete account"]
     },
     privacy: {
       back: "Back to home",
@@ -230,10 +230,58 @@ export const translations = {
         description:
           "For privacy questions, data access requests or account deletion requests, contact us using the details below. We respond within 30 days.",
         emailLabel: "Email",
-        email: "privacy@pps507.com",
+        email: "panamapostal@gmail.com",
         addressLabel: "Address",
         address: "PPS Logistics Inc., Panama City, Republic of Panama"
       }
+    },
+    deleteAccount: {
+      back: "Back to home",
+      title: "Delete your PPS account",
+      intro:
+        "You can request deletion of your PPS account and personal data at any time. Use one of the two methods below. Once we receive your request, we remove your account from active systems within 30 days.",
+      inApp: {
+        title: "From inside the app (fastest)",
+        description:
+          "If you can still sign in, deletion is a single tap away and takes effect immediately.",
+        steps: [
+          "Open the PPS app (customer or driver)",
+          "Sign in with your email and password",
+          "Go to Profile → Settings",
+          "Tap \"Delete account\" and confirm"
+        ]
+      },
+      byEmail: {
+        title: "By email (if you cannot sign in)",
+        description:
+          "Send us an email from the address associated with your account. We'll verify your identity and process the deletion.",
+        email: "panamapostal@gmail.com",
+        emailSubject: "PPS account deletion request",
+        emailBody:
+          "Hi,\n\nI'd like to delete my PPS account and the personal data associated with it.\n\n- Email on the account:\n- Phone number on the account:\n- App (customer / driver):\n\nThanks.",
+        cta: "Open email"
+      },
+      details: {
+        title: "What gets deleted",
+        items: [
+          "Your profile: name, email, phone number, profile photo, password hash.",
+          "Driver-only: license photos (front/back), vehicle photos, bank account details used for withdrawals.",
+          "Device tokens for push notifications, active session tokens.",
+          "Live GPS location node in Firebase (removed automatically when you go offline, and immediately when the account is deleted)."
+        ]
+      },
+      retention: {
+        title: "What we are required to keep",
+        description:
+          "Under Panamanian law and standard accounting practice, a small set of records cannot be deleted immediately:",
+        items: [
+          "Booking and transaction history for the last 5 years, kept in anonymized form for accounting, tax and dispute-resolution purposes.",
+          "Records that are subject to an open legal, regulatory or fraud investigation.",
+          "Standard server logs are rotated within 30 days."
+        ]
+      },
+      notice:
+        "After deletion, you will no longer be able to sign in. Any active bookings or deliveries must be completed or cancelled before deletion."
     }
   },
   es: {
@@ -357,7 +405,7 @@ export const translations = {
         links: ["PPS ID", "Portal de Negocios", "Gstionar Placas", "Soporte"]
       },
       copyright: "© 2026 PPS Logistics Inc. La solución postal definitiva de Panamá.",
-      legal: ["Panamá", "Privacidad", "Términos", "Legal"]
+      legal: ["Panamá", "Privacidad", "Términos", "Eliminar cuenta"]
     },
     privacy: {
       back: "Volver al inicio",
@@ -467,10 +515,58 @@ export const translations = {
         description:
           "Para consultas de privacidad, solicitudes de acceso a datos o solicitudes de eliminación de cuenta, escríbenos a los datos que están abajo. Respondemos dentro de 30 días.",
         emailLabel: "Correo",
-        email: "privacy@pps507.com",
+        email: "panamapostal@gmail.com",
         addressLabel: "Dirección",
         address: "PPS Logistics Inc., Ciudad de Panamá, República de Panamá"
       }
+    },
+    deleteAccount: {
+      back: "Volver al inicio",
+      title: "Eliminar tu cuenta PPS",
+      intro:
+        "Puedes solicitar la eliminación de tu cuenta PPS y de tus datos personales en cualquier momento. Usa uno de los dos métodos que están abajo. Una vez recibida tu solicitud, eliminamos tu cuenta de nuestros sistemas activos dentro de 30 días.",
+      inApp: {
+        title: "Desde la app (la forma más rápida)",
+        description:
+          "Si aún puedes iniciar sesión, eliminar tu cuenta es cuestión de un toque y se aplica de inmediato.",
+        steps: [
+          "Abre la app PPS (cliente o conductor)",
+          "Inicia sesión con tu correo y contraseña",
+          "Ve a Perfil → Configuración",
+          "Toca \"Eliminar cuenta\" y confirma"
+        ]
+      },
+      byEmail: {
+        title: "Por correo (si no puedes iniciar sesión)",
+        description:
+          "Envíanos un correo desde la dirección asociada a tu cuenta. Verificaremos tu identidad y procesaremos la eliminación.",
+        email: "panamapostal@gmail.com",
+        emailSubject: "Solicitud de eliminación de cuenta PPS",
+        emailBody:
+          "Hola,\n\nQuiero eliminar mi cuenta PPS y los datos personales asociados a ella.\n\n- Correo de la cuenta:\n- Número de teléfono de la cuenta:\n- App (cliente / conductor):\n\nGracias.",
+        cta: "Abrir correo"
+      },
+      details: {
+        title: "Qué se elimina",
+        items: [
+          "Tu perfil: nombre, correo, teléfono, foto de perfil y hash de contraseña.",
+          "Datos exclusivos del conductor: fotos de licencia (frente/reverso), fotos del vehículo y datos de cuenta bancaria usados para retiros.",
+          "Tokens de dispositivo para notificaciones push y tokens de sesión activos.",
+          "Nodo de ubicación GPS en vivo en Firebase (se borra automáticamente al salir en línea, y de inmediato al eliminar la cuenta)."
+        ]
+      },
+      retention: {
+        title: "Qué estamos obligados a conservar",
+        description:
+          "Por la ley panameña y las prácticas contables estándar, un conjunto limitado de registros no se puede borrar de inmediato:",
+        items: [
+          "Historial de reservas y transacciones de los últimos 5 años, conservado de forma anonimizada con fines contables, fiscales y de resolución de disputas.",
+          "Registros sujetos a una investigación legal, regulatoria o de fraude en curso.",
+          "Los registros estándar del servidor se rotan dentro de 30 días."
+        ]
+      },
+      notice:
+        "Después de eliminar tu cuenta ya no podrás iniciar sesión. Cualquier reserva o entrega en curso debe completarse o cancelarse antes de la eliminación."
     }
   }
 };

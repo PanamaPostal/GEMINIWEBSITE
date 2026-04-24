@@ -34,7 +34,7 @@ import { useState, useEffect, createContext, useContext } from 'react';
 import { translations } from './translations';
 
 type Language = 'en' | 'es';
-export type View = 'home' | 'garbage' | 'mayors' | 'police' | 'privacy';
+export type View = 'home' | 'garbage' | 'mayors' | 'police' | 'privacy' | 'delete-account';
 
 const LanguageContext = createContext<{
   lang: Language;
@@ -657,6 +657,119 @@ const PrivacyPolicy = () => {
   );
 };
 
+const DeleteAccount = () => {
+  const { t, setView } = useTranslation();
+  const data = t.deleteAccount;
+
+  return (
+    <div className="pt-32 min-h-screen bg-white">
+      <div className="max-w-screen-md mx-auto px-6 md:px-12">
+        <button
+          onClick={() => { setView('home'); window.scrollTo(0, 0); }}
+          className="flex items-center gap-2 text-apple-blue font-medium mb-12 hover:translate-x-[-4px] transition-transform"
+        >
+          <ChevronRight size={16} className="rotate-180" />
+          {data.back}
+        </button>
+
+        <div className="w-16 h-16 bg-apple-bg rounded-2xl flex items-center justify-center mb-8">
+          <Trash2 size={32} className="text-apple-black" />
+        </div>
+
+        <h1 className="text-[44px] md:text-[56px] font-semibold tracking-[-0.022em] leading-[1.05] mb-6">
+          {data.title}
+        </h1>
+        <p className="text-[19px] secondary-text leading-relaxed font-normal mb-16">
+          {data.intro}
+        </p>
+
+        <div className="space-y-10 pb-16">
+          <section className="bento-card border-none bg-apple-bg p-10">
+            <div className="flex items-start gap-4 mb-4">
+              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0">
+                <span className="text-[18px] font-semibold text-apple-black">1</span>
+              </div>
+              <div>
+                <h2 className="text-[24px] font-semibold tracking-[-0.022em] mb-2">
+                  {data.inApp.title}
+                </h2>
+                <p className="text-[17px] secondary-text leading-relaxed">
+                  {data.inApp.description}
+                </p>
+              </div>
+            </div>
+            <ol className="space-y-2 mt-6 ml-14 text-[16px]">
+              {data.inApp.steps.map((s, i) => (
+                <li key={i} className="flex gap-3 leading-relaxed">
+                  <span className="text-apple-gray font-mono shrink-0">{i + 1}.</span>
+                  <span className="text-apple-black">{s}</span>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          <section className="bento-card border-none bg-apple-bg p-10">
+            <div className="flex items-start gap-4 mb-4">
+              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0">
+                <span className="text-[18px] font-semibold text-apple-black">2</span>
+              </div>
+              <div>
+                <h2 className="text-[24px] font-semibold tracking-[-0.022em] mb-2">
+                  {data.byEmail.title}
+                </h2>
+                <p className="text-[17px] secondary-text leading-relaxed mb-4">
+                  {data.byEmail.description}
+                </p>
+                <a
+                  href={`mailto:${data.byEmail.email}?subject=${encodeURIComponent(data.byEmail.emailSubject)}&body=${encodeURIComponent(data.byEmail.emailBody)}`}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-apple-black text-white text-[15px] font-semibold hover:bg-apple-blue transition-colors"
+                >
+                  {data.byEmail.cta} <ArrowRight size={16} />
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-[28px] font-semibold tracking-[-0.022em] mb-4">
+              {data.details.title}
+            </h2>
+            <ul className="space-y-3 mt-4">
+              {data.details.items.map((item, i) => (
+                <li key={i} className="flex gap-3 text-[17px] secondary-text leading-relaxed">
+                  <span className="text-apple-blue mt-[9px] text-[8px] shrink-0">●</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-[28px] font-semibold tracking-[-0.022em] mb-4">
+              {data.retention.title}
+            </h2>
+            <p className="text-[17px] secondary-text leading-relaxed mb-3">
+              {data.retention.description}
+            </p>
+            <ul className="space-y-2 mt-4">
+              {data.retention.items.map((item, i) => (
+                <li key={i} className="flex gap-3 text-[17px] secondary-text leading-relaxed">
+                  <span className="text-apple-blue mt-[9px] text-[8px] shrink-0">●</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="text-[14px] secondary-text italic leading-relaxed">
+            {data.notice}
+          </section>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Footer = () => {
   const { t, setView } = useTranslation();
   return (
@@ -693,7 +806,7 @@ const Footer = () => {
         </div>
         <div className="pt-8 border-t border-gray-300 flex flex-col md:flex-row justify-between items-center text-[11px] secondary-text gap-4">
           <p>{t.footer.copyright}</p>
-          <div className="flex space-x-6">
+          <div className="flex flex-wrap space-x-6 gap-y-2">
             <span>{t.footer.legal[0]}</span>
             <button
               onClick={() => { setView('privacy'); window.scrollTo(0, 0); }}
@@ -702,7 +815,12 @@ const Footer = () => {
               {t.footer.legal[1]}
             </button>
             <a href="#" className="hover:text-apple-black transition-colors underline-offset-2">{t.footer.legal[2]}</a>
-            <a href="#" className="hover:text-apple-black transition-colors underline-offset-2">{t.footer.legal[3]}</a>
+            <button
+              onClick={() => { setView('delete-account'); window.scrollTo(0, 0); }}
+              className="hover:text-apple-black transition-colors underline-offset-2 cursor-pointer"
+            >
+              {t.footer.legal[3]}
+            </button>
           </div>
         </div>
       </div>
@@ -716,6 +834,7 @@ const Footer = () => {
 const PATH_TO_VIEW: Record<string, View> = {
   '/': 'home',
   '/privacy': 'privacy',
+  '/delete-account': 'delete-account',
   '/garbage': 'garbage',
   '/mayors': 'mayors',
   '/police': 'police',
@@ -723,6 +842,7 @@ const PATH_TO_VIEW: Record<string, View> = {
 const VIEW_TO_PATH: Record<View, string> = {
   home: '/',
   privacy: '/privacy',
+  'delete-account': '/delete-account',
   garbage: '/garbage',
   mayors: '/mayors',
   police: '/police',
@@ -772,6 +892,8 @@ export default function App() {
             </>
           ) : view === 'privacy' ? (
             <PrivacyPolicy />
+          ) : view === 'delete-account' ? (
+            <DeleteAccount />
           ) : (
             <ServiceDetailPage type={view} />
           )}
