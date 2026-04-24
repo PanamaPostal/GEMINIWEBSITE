@@ -710,9 +710,49 @@ const Footer = () => {
   );
 };
 
+// Map URL paths ↔ views so deep links like /privacy work and the browser
+// history updates when navigating between views. Google Play and crawlers
+// need a real URL, not just a React state toggle.
+const PATH_TO_VIEW: Record<string, View> = {
+  '/': 'home',
+  '/privacy': 'privacy',
+  '/garbage': 'garbage',
+  '/mayors': 'mayors',
+  '/police': 'police',
+};
+const VIEW_TO_PATH: Record<View, string> = {
+  home: '/',
+  privacy: '/privacy',
+  garbage: '/garbage',
+  mayors: '/mayors',
+  police: '/police',
+};
+
 export default function App() {
   const [lang, setLang] = useState<Language>('es');
-  const [view, setView] = useState<View>('home');
+  const [view, setViewState] = useState<View>(() => {
+    if (typeof window === 'undefined') return 'home';
+    return PATH_TO_VIEW[window.location.pathname] ?? 'home';
+  });
+
+  // Keep URL in sync with the current view (pushState on navigation,
+  // listen to browser back/forward to update the view).
+  const setView = (next: View) => {
+    setViewState(next);
+    const nextPath = VIEW_TO_PATH[next];
+    if (typeof window !== 'undefined' && window.location.pathname !== nextPath) {
+      window.history.pushState({ view: next }, '', nextPath);
+    }
+  };
+
+  useEffect(() => {
+    const onPop = () => {
+      const v = PATH_TO_VIEW[window.location.pathname] ?? 'home';
+      setViewState(v);
+    };
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, view, setView, t: translations[lang] }}>
